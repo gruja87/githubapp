@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GithubApp</string>
+
+    <string name="repo_list">Repos</string>
+    <string name="commit_list">Commits</string>
+    <string name="profile">Profile</string>
+
+    <string name="okhttp_logging_tag">OkHttp</string>
+</resources>

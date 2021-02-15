@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--Text-->
+    <!--text size-->
+    <dimen name="repo_list_item_name_text_size">18sp</dimen>
+    <dimen name="repo_list_item_issue_count_text_size">16sp</dimen>
     <dimen name="profile_name_text_size">20sp</dimen>
     <dimen name="profile_company_text_size">16sp</dimen>
+    <dimen name="commit_list_item_name_text_size">16sp</dimen>
+    <dimen name="commit_list_item_message_text_size">14sp</dimen>
+    <dimen name="commit_list_item_date_text_size">12sp</dimen>
 
-    <!--Margin-->
+    <!--image size-->
+    <dimen name="profile_avatar_image_width">150dp</dimen>
+    <dimen name="profile_avatar_image_height">150dp</dimen>
+    <dimen name="commit_avatar_image_width">80dp</dimen>
+    <dimen name="commit_avatar_image_height">80dp</dimen>
+
+    <!--margin-->
+    <dimen name="repo_list_item_padding">10dp</dimen>
     <dimen name="profile_avatar_margin_top">20dp</dimen>
     <dimen name="profile_name_margin_top">20dp</dimen>
     <dimen name="profile_company_margin_top">20dp</dimen>
+    <dimen name="commit_list_item_padding">10dp</dimen>
 </resources>

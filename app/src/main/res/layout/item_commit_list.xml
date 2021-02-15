@@ -3,31 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="@dimen/commit_list_item_padding">
+
+    <ImageView
+        android:id="@+id/iv_commit_author_avatar"
+        android:layout_width="@dimen/commit_avatar_image_width"
+        android:layout_height="@dimen/commit_avatar_image_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_commit_commiter_name"
+        android:id="@+id/tv_commit_author_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/commit_list_item_name_text_size"
         app:layout_constraintEnd_toStartOf="@+id/tv_commit_date"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_commit_author_avatar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_commit_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/commit_list_item_message_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_commit_commiter_name" />
+        app:layout_constraintStart_toEndOf="@+id/iv_commit_author_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_commit_author_name" />
 
     <TextView
         android:id="@+id/tv_commit_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/commit_list_item_date_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_commit_author_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_commit_author_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

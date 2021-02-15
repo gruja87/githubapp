@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/iv_profile_avatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/profile_avatar_image_width"
+        android:layout_height="@dimen/profile_avatar_image_height"
         android:layout_marginTop="@dimen/profile_avatar_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

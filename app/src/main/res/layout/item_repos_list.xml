@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="@dimen/repo_list_item_padding">
 
     <TextView
         android:id="@+id/tv_repo_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="@dimen/repo_list_item_name_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_repo_open_issues"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +20,9 @@
         android:id="@+id/tv_repo_open_issues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_repo_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/tv_repo_name"
+        android:textSize="@dimen/repo_list_item_issue_count_text_size"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

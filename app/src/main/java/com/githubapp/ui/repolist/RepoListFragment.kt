@@ -27,7 +27,10 @@ class RepoListFragment : Fragment(R.layout.fragment_repos_list),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.repo_list)
+        (requireActivity() as AppCompatActivity).apply {
+            supportActionBar?.title = getString(R.string.repo_list)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
 
         setupRecyclerView()
 

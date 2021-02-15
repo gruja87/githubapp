@@ -26,7 +26,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.profile)
+        (requireActivity() as AppCompatActivity).apply {
+            supportActionBar?.title = getString(R.string.profile)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
+
 
         subscribeObservers()
 

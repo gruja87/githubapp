@@ -1,18 +1,23 @@
 package com.githubapp.ui.commitlist
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.githubapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_commits_list.*
 import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
@@ -21,10 +26,21 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
 
     private lateinit var commitListAdapter: CommitListAdapter
 
+    @Inject
+    lateinit var requestManager: RequestManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.commit_list)
+        (requireActivity() as AppCompatActivity).apply {
+            supportActionBar?.title = getString(R.string.commit_list)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
 
         setupRecyclerView()
         subscribeObservers()
@@ -56,17 +72,30 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
     private fun setupRecyclerView() {
         rv_commit_list.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            commitListAdapter = CommitListAdapter()
+            commitListAdapter = CommitListAdapter(
+                requestManager = requestManager
+            )
             adapter = commitListAdapter
         }
     }
 
-    private fun parseData(){
+    private fun parseData() {
         val owner = requireArguments().getString("owner")
         val repo = requireArguments().getString("repo")
 
-        if (!owner.isNullOrEmpty() && !repo.isNullOrEmpty()){
+        if (!owner.isNullOrEmpty() && !repo.isNullOrEmpty()) {
             viewModel.getCommitList(owner, repo)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController()
+                    .navigateUp()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

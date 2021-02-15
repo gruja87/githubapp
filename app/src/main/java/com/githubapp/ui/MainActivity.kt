@@ -3,6 +3,7 @@ package com.githubapp.ui
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.githubapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,15 +21,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.main_graph, true)
+            .build()
         when (menuItem.itemId) {
             R.id.repos_list -> {
                 findNavController(R.id.main_nav_host_fragment)
-                    .navigate(R.id.reposListFragment)
+                    .navigate(R.id.reposListFragment, null, navOptions)
                 return true
             }
             R.id.profile -> {
                 findNavController(R.id.main_nav_host_fragment)
-                    .navigate(R.id.profileFragment)
+                    .navigate(R.id.profileFragment, null, navOptions)
                 return true
             }
         }

@@ -2,6 +2,7 @@ package com.githubapp.ui.commitlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.githubapp.data.DispatcherProvider
 import com.githubapp.data.models.Commit
 import com.githubapp.repositories.commitlist.CommitListRepository
 import com.githubapp.util.Resource
@@ -15,7 +16,8 @@ import javax.inject.Inject
 class CommitListViewModel
 @Inject
 constructor(
-    private val commitsListRepository: CommitListRepository
+    private val commitsListRepository: CommitListRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
     sealed class CommitsEvent {
@@ -30,7 +32,7 @@ constructor(
         get() = _stateEvent
 
     fun getCommitList(owner: String, repo: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcherProvider.io) {
             _stateEvent.value = CommitsEvent.Loading
             when (val commitListResponse = commitsListRepository.getCommitList(owner, repo)) {
                 is Resource.Success -> _stateEvent.value =

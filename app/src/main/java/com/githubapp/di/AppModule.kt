@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.githubapp.BuildConfig
+import com.githubapp.data.DispatcherProvider
 import com.githubapp.data.GithubApi
 import com.githubapp.repositories.commitlist.CommitListRepository
 import com.githubapp.repositories.commitlist.CommitListRepositoryImpl
@@ -18,6 +19,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -72,26 +75,45 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepoListRepository(
-        githubApi: GithubApi
+        githubApi: GithubApi,
+        dispatcherProvider: DispatcherProvider
     ): RepoListRepository = RepoListRepositoryImpl(
-        githubApi
+        githubApi,
+        dispatcherProvider
     )
 
     @Singleton
     @Provides
     fun provideProfileRepository(
-        githubApi: GithubApi
+        githubApi: GithubApi,
+        dispatcherProvider: DispatcherProvider
     ): ProfileRepository = ProfileRepositoryImpl(
-        githubApi
+        githubApi,
+        dispatcherProvider
     )
 
     @Singleton
     @Provides
     fun provideCommitListRepository(
-        githubApi: GithubApi
+        githubApi: GithubApi,
+        dispatcherProvider: DispatcherProvider
     ): CommitListRepository = CommitListRepositoryImpl(
-        githubApi
+        githubApi,
+        dispatcherProvider
     )
+
+    @Singleton
+    @Provides
+    fun provideDispatchers(): DispatcherProvider = object : DispatcherProvider {
+        override val main: CoroutineDispatcher
+            get() = Dispatchers.Main
+        override val io: CoroutineDispatcher
+            get() = Dispatchers.IO
+        override val default: CoroutineDispatcher
+            get() = Dispatchers.Default
+        override val unconfined: CoroutineDispatcher
+            get() = Dispatchers.Unconfined
+    }
 
     @Singleton
     @Provides

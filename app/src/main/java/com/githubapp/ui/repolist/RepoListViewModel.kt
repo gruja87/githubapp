@@ -2,11 +2,11 @@ package com.githubapp.ui.repolist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.githubapp.data.DispatcherProvider
 import com.githubapp.data.models.Repo
 import com.githubapp.repositories.repolist.RepoListRepository
 import com.githubapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +16,8 @@ import javax.inject.Inject
 class RepoListViewModel
 @Inject
 constructor(
-    private val reposListRepository: RepoListRepository
+    private val reposListRepository: RepoListRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
     sealed class ReposEvent {
@@ -31,7 +32,7 @@ constructor(
         get() = _stateEvent
 
     fun getReposList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcherProvider.io) {
             _stateEvent.value = ReposEvent.Loading
             when (val reposListResponse = reposListRepository.getReposList()) {
                 is Resource.Success -> _stateEvent.value = ReposEvent.Success(reposListResponse.data as List<Repo>)

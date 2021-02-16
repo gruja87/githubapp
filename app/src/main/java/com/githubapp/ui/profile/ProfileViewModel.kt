@@ -2,6 +2,7 @@ package com.githubapp.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.githubapp.data.DispatcherProvider
 import com.githubapp.data.models.Profile
 import com.githubapp.repositories.profile.ProfileRepository
 import com.githubapp.util.Resource
@@ -15,7 +16,8 @@ import javax.inject.Inject
 class ProfileViewModel
 @Inject
 constructor(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
     sealed class ProfileEvent {
@@ -30,7 +32,7 @@ constructor(
         get() = _stateEvent
 
     fun getProfile() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcherProvider.io) {
             _stateEvent.value = ProfileEvent.Loading
             when (val profileResponse = profileRepository.getProfile()) {
                 is Resource.Success -> _stateEvent.value = ProfileEvent.Success(profileResponse.data!!)

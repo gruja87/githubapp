@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.githubapp.R
 import com.githubapp.data.models.Commit
+import com.githubapp.util.formatDate
 import kotlinx.android.synthetic.main.item_commit_list.view.*
 
 class CommitListAdapter
 constructor(
-    private var commitList: List<Commit> = ArrayList()
+    private var commitList: List<Commit> = ArrayList(),
+    private val requestManager: RequestManager
 ) : RecyclerView.Adapter<CommitListAdapter.ReposListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReposListItemViewHolder {
@@ -42,9 +45,14 @@ constructor(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(commit: Commit) {
-            itemView.tv_commit_commiter_name.text = commit.commit.committer.name
-            itemView.tv_commit_message.text = commit.commit.message
-            itemView.tv_commit_date.text = commit.commit.committer.date
+            itemView.tv_commit_author_name.text = commit.commit?.committer?.name
+            itemView.tv_commit_message.text = commit.commit?.message
+            itemView.tv_commit_date.text = formatDate(commit.commit?.committer?.date ?: "")
+
+            requestManager
+                .load(commit.committer?.avatar_url)
+                .placeholder(R.drawable.ic_photo)
+                .into(itemView.iv_commit_author_avatar)
         }
     }
 }

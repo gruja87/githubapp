@@ -4,34 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="@dimen/commit_detail_list_item_padding"
     tools:context=".ui.commitdetail.CommitDetailFragment">
-
-    <TextView
-        android:id="@+id/tv_commit_detail_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_commit_detail_commiter_avatar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="@dimen/commit_detail_avatar_image_width"
+        android:layout_height="@dimen/commit_detail_avatar_image_height"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_commit_detail_desc" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_commit_detail_commiter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/commit_detail_list_item_commiter_margin_start"
         android:textColor="@android:color/darker_gray"
-        android:textSize="16sp"
+        android:textSize="@dimen/commit_detail_list_item_commiter_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/iv_commit_detail_commiter_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,33 +28,34 @@
         app:layout_constraintTop_toTopOf="@+id/iv_commit_detail_commiter_avatar" />
 
     <TextView
+        android:id="@+id/tv_commit_detail_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/commit_detail_list_item_desc_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_commit_detail_commiter_avatar"
+        android:layout_marginTop="@dimen/commit_detail_list_item_desc_margin_top"/>
+
+    <TextView
         android:id="@+id/tv_commit_detail_commit_sha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/commit_detail_list_item_sha_margin_top"
         android:textColor="@android:color/darker_gray"
-        android:textSize="14sp"
+        android:textSize="@dimen/commit_detail_list_item_sha_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_commit_detail_commiter" />
+        app:layout_constraintTop_toBottomOf="@id/tv_commit_detail_desc" />
 
     <TextView
         android:id="@+id/tv_commit_detail_comments_num"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/commit_detail_list_item_comments_num_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_commit_detail_commit_sha" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_commit_detail_comments"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_commit_detail_comments_num" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,10 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
                 when (event) {
                     is CommitListViewModel.CommitsEvent.Success -> {
                         pb_commit_list.visibility = View.INVISIBLE
+                        tv_commit_num.text = String.format(
+                            getString(R.string.format_commits_num),
+                            event.commitsList.size
+                        )
                         commitListAdapter.addCommitList(event.commitsList)
                     }
 

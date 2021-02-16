@@ -4,6 +4,6 @@
     <string name="repo_list">Repos</string>
     <string name="commit_list">Commits</string>
     <string name="profile">Profile</string>
-
-    <string name="okhttp_logging_tag">OkHttp</string>
+    
+    <string name="format_commits_num">%d commits</string>
 </resources>

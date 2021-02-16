@@ -84,6 +84,7 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
         val repo = requireArguments().getString("repo")
 
         if (!owner.isNullOrEmpty() && !repo.isNullOrEmpty()) {
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = repo
             viewModel.getCommitList(owner, repo)
         }
     }

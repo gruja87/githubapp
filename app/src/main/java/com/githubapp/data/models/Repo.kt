@@ -19,6 +19,8 @@ data class Repo(
     val created_at: String,
     val default_branch: String,
     val deployments_url: String,
+    @SerializedName("description")
+    @Expose
     val description: String,
     val disabled: Boolean,
     val downloads_url: String,

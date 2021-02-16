@@ -11,18 +11,32 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="@dimen/repo_list_item_name_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_repo_open_issues"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_repo_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/repo_list_item_desc_margin_top"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/repo_list_item_desc_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_repo_open_issues"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
+        android:maxLines="2"
+        android:ellipsize="end"/>
+
+    <TextView
         android:id="@+id/tv_repo_open_issues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/repo_list_item_issue_count_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tv_repo_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_repo_name"
-        android:textSize="@dimen/repo_list_item_issue_count_text_size"/>
+        android:textColor="@android:color/darker_gray"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

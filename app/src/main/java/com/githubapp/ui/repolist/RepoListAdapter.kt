@@ -44,6 +44,7 @@ constructor(
 
         fun bind(repo: Repo) {
             itemView.tv_repo_name.text = repo.full_name
+            itemView.tv_repo_desc.text = repo.description
             itemView.tv_repo_open_issues.text = repo.open_issues_count.toString()
 
             itemView.setOnClickListener {

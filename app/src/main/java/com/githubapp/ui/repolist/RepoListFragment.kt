@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.githubapp.R
 import com.githubapp.data.models.Repo
+import com.githubapp.util.Constants.TAG_OWNER
+import com.githubapp.util.Constants.TAG_REPO
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos_list.*
 import kotlinx.coroutines.flow.collect
@@ -71,8 +73,8 @@ class RepoListFragment : Fragment(R.layout.fragment_repos_list),
 
     override fun repoClicked(repo: Repo) {
         val bundle = Bundle()
-        bundle.putString("owner", repo.owner.login)
-        bundle.putString("repo", repo.name)
+        bundle.putString(TAG_OWNER, repo.owner.login)
+        bundle.putString(TAG_REPO, repo.name)
         findNavController()
             .navigate(
                 R.id.commitListFragment,

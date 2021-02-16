@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.githubapp.R
+import com.githubapp.data.models.Commit
+import com.githubapp.util.Constants.TAG_COMMIT
+import com.githubapp.util.Constants.TAG_OWNER
+import com.githubapp.util.Constants.TAG_REPO
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_commits_list.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class CommitListFragment : Fragment(R.layout.fragment_commits_list),
@@ -86,8 +89,8 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list),
     }
 
     private fun parseData() {
-        val owner = requireArguments().getString("owner")
-        val repo = requireArguments().getString("repo")
+        val owner = requireArguments().getString(TAG_OWNER)
+        val repo = requireArguments().getString(TAG_REPO)
 
         if (!owner.isNullOrEmpty() && !repo.isNullOrEmpty()) {
             (requireActivity() as AppCompatActivity).supportActionBar?.title = repo
@@ -106,9 +109,9 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun commitClicked(sha: String) {
+    override fun commitClicked(commit: Commit) {
         val bundle = Bundle()
-        bundle.putString("commit_sha", sha)
+        bundle.putParcelable(TAG_COMMIT, commit)
         findNavController()
             .navigate(R.id.commitDetailFragment, bundle)
     }

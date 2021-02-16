@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
 import com.githubapp.R
 import com.githubapp.data.models.Commit
+import com.githubapp.util.Constants
 import com.githubapp.util.formatDate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_commit_detail.*
@@ -32,10 +32,10 @@ class CommitDetailFragment : Fragment(R.layout.fragment_commit_detail) {
     }
 
     private fun parseData() {
-        val sha = requireArguments().getString("commit_sha")
+        val sha = requireArguments().getParcelable<Commit>(Constants.TAG_COMMIT)
 
         sha?.let {
-            tv_commit_detail_desc.text = sha
+            setupUI(it)
         }
     }
 
@@ -54,8 +54,14 @@ class CommitDetailFragment : Fragment(R.layout.fragment_commit_detail) {
             commit.sha
         )
 
+        tv_commit_detail_comments_num.text = String.format(
+            getString(R.string.format_comment_num),
+            commit.commit?.comment_count
+        )
+
         requestManager
             .load(commit.committer?.avatar_url)
+            .placeholder(R.drawable.ic_photo)
             .into(iv_commit_detail_commiter_avatar)
     }
 

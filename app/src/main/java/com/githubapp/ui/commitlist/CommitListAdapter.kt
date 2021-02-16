@@ -56,12 +56,12 @@ constructor(
                 .into(itemView.iv_commit_author_avatar)
 
             itemView.setOnClickListener {
-                onCommitClickListener.commitClicked(commit.sha)
+                onCommitClickListener.commitClicked(commit)
             }
         }
     }
 
-    interface OnCommitClickListener{
-        fun commitClicked(sha: String)
+    interface OnCommitClickListener {
+        fun commitClicked(commit: Commit)
     }
 }

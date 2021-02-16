@@ -8,4 +8,5 @@
     <string name="format_commits_num">%d commits</string>
     <string name="format_commiter_text">%1$s committed on %2$s</string>
     <string name="format_commit_sha">commit %1$s</string>
+    <string name="format_comment_num">%d comment on commit</string>
 </resources>

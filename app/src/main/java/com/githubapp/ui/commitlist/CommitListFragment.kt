@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
+class CommitListFragment : Fragment(R.layout.fragment_commits_list),
+    CommitListAdapter.OnCommitClickListener {
 
     private val viewModel: CommitListViewModel by viewModels()
 
@@ -77,7 +78,8 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
         rv_commit_list.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             commitListAdapter = CommitListAdapter(
-                requestManager = requestManager
+                requestManager = requestManager,
+                onCommitClickListener = this@CommitListFragment
             )
             adapter = commitListAdapter
         }
@@ -102,5 +104,12 @@ class CommitListFragment : Fragment(R.layout.fragment_commits_list) {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun commitClicked(sha: String) {
+        val bundle = Bundle()
+        bundle.putString("commit_sha", sha)
+        findNavController()
+            .navigate(R.id.commitDetailFragment, bundle)
     }
 }

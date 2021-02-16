@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.item_commit_list.view.*
 class CommitListAdapter
 constructor(
     private var commitList: List<Commit> = ArrayList(),
-    private val requestManager: RequestManager
+    private val requestManager: RequestManager,
+    private val onCommitClickListener: OnCommitClickListener
 ) : RecyclerView.Adapter<CommitListAdapter.ReposListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReposListItemViewHolder {
@@ -53,6 +54,14 @@ constructor(
                 .load(commit.committer?.avatar_url)
                 .placeholder(R.drawable.ic_photo)
                 .into(itemView.iv_commit_author_avatar)
+
+            itemView.setOnClickListener {
+                onCommitClickListener.commitClicked(commit.sha)
+            }
         }
+    }
+
+    interface OnCommitClickListener{
+        fun commitClicked(sha: String)
     }
 }

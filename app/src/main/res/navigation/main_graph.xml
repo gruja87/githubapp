@@ -19,12 +19,10 @@
         android:id="@+id/commitListFragment"
         android:name="com.githubapp.ui.commitlist.CommitListFragment"
         android:label="CommitListFragment"
-        tools:layout="@layout/fragment_commits_list">
-        <argument
-            android:name="owner"
-            app:argType="string" />
-        <argument
-            android:name="repo"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_commits_list"/>
+    <fragment
+        android:id="@+id/commitDetailFragment"
+        android:name="com.githubapp.ui.commitdetail.CommitDetailFragment"
+        android:label="fragment_commit_detail"
+        tools:layout="@layout/fragment_commit_detail"/>
 </navigation>

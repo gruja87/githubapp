@@ -8,11 +8,8 @@ data class Commit(
     val comments_url: String,
     @SerializedName("commit")
     @Expose
-    val commit: CommitX,
-    val committer: CommitterX,
-    val html_url: String,
-    val node_id: String,
-    val parents: List<Parent>,
-    val sha: String,
-    val url: String
+    val commit: CommitX? = null,
+    @SerializedName("committer")
+    @Expose
+    val committer: CommitterX? = null
 )

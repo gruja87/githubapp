@@ -10,11 +10,8 @@ data class CommitX(
     val comment_count: Int,
     @SerializedName("committer")
     @Expose
-    val committer: Committer,
+    val committer: Committer? = null,
     @SerializedName("message")
     @Expose
-    val message: String,
-    val tree: Tree,
-    val url: String,
-    val verification: Verification
+    val message: String
 )

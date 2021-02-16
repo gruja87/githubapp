@@ -34,7 +34,7 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/darker_gray"
         android:textSize="@dimen/commit_list_item_message_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +48,7 @@
         android:textSize="@dimen/commit_list_item_date_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tv_commit_author_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_commit_author_name" />
+        app:layout_constraintTop_toTopOf="@+id/tv_commit_author_name"
+        android:textColor="@android:color/darker_gray"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
